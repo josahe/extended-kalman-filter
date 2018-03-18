@@ -12,7 +12,6 @@ Tools::~Tools() {}
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &ground_truth) {
   /**
-  TODO:
     * Calculate the RMSE here.
   */
 
@@ -30,7 +29,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	}
 
 	//accumulate squared residuals
-	for (int i = 0; i < estimations.size(); ++i)  {
+	for (unsigned int i = 0; i < estimations.size(); ++i)  {
 		VectorXd residual = estimations[i] - ground_truth[i];
 		residual = residual.array() * residual.array();
 		rmse += residual;
@@ -49,7 +48,6 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 
 MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   /**
-  TODO:
     * Calculate a Jacobian here.
   */
 
@@ -67,9 +65,9 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   float c3 = vx*py - vy*px;
   float c4 = pow(c1, 3/2);
 
-  //check division by zero
-  if (c1 == 0) {
-    cout << "Attempted divide by zero\n" << endl;
+  //check division by zero or close to zero
+  if (c1 <= 0.001) {
+    throw std::overflow_error("Attempted divide by zero\n");
   }
 
   //compute the Jacobian matrix elements

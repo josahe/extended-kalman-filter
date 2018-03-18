@@ -1,6 +1,8 @@
 #ifndef KALMAN_FILTER_H_
 #define KALMAN_FILTER_H_
 #include "Eigen/Dense"
+#include <cmath>
+#include "tools.h"
 
 class KalmanFilter {
 public:
@@ -50,7 +52,7 @@ public:
    */
   void Init(Eigen::VectorXd &x_in, Eigen::MatrixXd &P_in, Eigen::MatrixXd &F_in,
       Eigen::MatrixXd &Q_in, Eigen::MatrixXd &R_laser_in, Eigen::MatrixXd &R_radar_in,
-      Eigen::MatrixXd &H_laser_in, Eigen::MatrixXd &H_radar_in);
+      Eigen::MatrixXd &H_laser_in);
 
   /**
    * Prediction Predicts the state and the state covariance
@@ -70,6 +72,11 @@ public:
    * @param z The measurement at k+1
    */
   void UpdateEKF(const Eigen::VectorXd &z);
+
+private:
+  const float Pi_ = atan(1)*4;
+  const float twoPi_ = 2*Pi_;
+  Tools tools_;
 
 };
 
