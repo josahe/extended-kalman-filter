@@ -11,7 +11,7 @@ The Kalman Filter is a continuous loop of measurement updates and predictions. T
 
 The pipeline forks depending on which sensor the measurement has come from. The Kalman Filter equations are similar between the two sensor types - they are essentially extracting the same information. The main differences are:
 1. Radar produces data with Polar coordinates, which must be converted to the Cartesian coordinates used to track the object.
-2. The equations to map radar data to position/velocity state parameters are non-linear, which produces a non-Gaussian distribution that can then not be used to make reliable predictions with our otherwise Gaussian data. To maintain the desired distribution of our data, the mapping functions are linearised.
+2. The equations to map radar data to position/velocity state parameters are non-linear, which produces a non-Gaussian distribution that can then not be used to make as reliable predictions with our otherwise Gaussian data. To maintain the desired distribution of our data, the mapping functions are linearised.
 
 ## HOW TO USE
 ### Project dependencies
